@@ -8,8 +8,8 @@ A C++ hardware abstraction layer for embedded systems (such as microcontrollers)
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2014-08-18
-- Last Modified: 2014-09-12
-- Version: v1.0.0.0
+- Last Modified: 2014-09-15
+- Version: v2.0.0.0
 - Company: MbeddedNinja
 - Project: The Mbedded toolkit (MToolkit) project.
 - Language: C++
@@ -33,6 +33,7 @@ Uses inhertiance from an abstract iterface class, to provide implementations for
 Provided Hardware Abstraction Layers
 ------------------------------------
 
+- ADC
 - GPIO
 - UART
 
@@ -50,6 +51,13 @@ Currently Supported Platforms
 
 Note it is easy and encourged for you to port this to a specific platform! Just copy the header files in :code:'port/', but replace the methods with the platform-specific code!
 
+Using The ADC
+-------------
+
+The ADC currently supports the "SOFTWARE_TRIGGER_INT_ON_COMPLETION" mode. This is where the ADC is started via a software call, and waits until the ADC is complete via an "end-of-completion" (EOC) interrupt firing, at which point the ADC value is read and returned from the method call.
+
+The ADC supports an non-exhaustive block by use of a mutex provided by the OSAL (operating system abstraction layer).
+
 Supported Compilers
 ===================
 
@@ -62,8 +70,9 @@ Installation
 1. Clone the git repo onto your local storage.
 2. Include the relevant platform-specific headers from :code:'port/'. For example, if you are using PSoC, you would include:
 
-- :code:`PsocHalGpio.hpp`
-- :code:`PsocHalUart.hpp`
+- :code:`PsocAdc.hpp`
+- :code:`PsocGpio.hpp`
+- :code:`PsocUart.hpp`
 
 
 Code Dependencies
@@ -100,19 +109,19 @@ Basic Example Using PSoC As Our Platform
 	#include "MHal/api/MHalApi.hpp"
 	
 	// Say we are on a PSoC, so we include the PSoC-specific headers from port/
-	#include "MHal/port/PSoC/PsocHalGpio.hpp"
+	#include "MHal/port/PSoC/PsocGpio.hpp"
 	
 	using namespace MbeddedNinja;
 	
 	int main()
 	{
 		// Create a new PSoC GPIO object
-		MHalNs::HalGpio * myGpioPin = new MHalNs::PsocHalGpio(
+		MHalNs::Gpio * myGpioPin = new MHalNs::PsocGpio(
 			&MyGpioOnTopDesign_Read,		// These are pointers to the pin API functions PSoC Creator automatically produces
 			&MyGpioOnTopDesign_Write);
 		
 		// Note, if I was on an Arduino instead, I could just of easily typed this...
-		// MHalNs::HalGpio * myArduinoPin = new MHalNs::ArduinoHalGpio(...);
+		// MHalNs::Gpio * myArduinoPin = new MHalNs::ArduinoGpio(...);
 		
 		// All done! 
 		// Now we can pass the generic HalGpio object to other modules
@@ -134,5 +143,6 @@ Changelog
 ========= ========== ===================================================================================================
 Version    Date       Comment
 ========= ========== ===================================================================================================
+v2.0.0.0  2014-09-15 Added hardware abstraction layer for a ADC, closes #2. Wrapped all code in the MbeddedNinja namespace, closes #3. Dropped the Hal prefix on code files and classes, as it is not needed, closes #4.
 v1.0.0.0  2014-09-12 Initial commit, added code, closes #1. GPIO and UART HAL objects added. PSoC-specific child classes for these objects added. Added example to README.
 ========= ========== ===================================================================================================
