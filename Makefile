@@ -1,9 +1,9 @@
 #
 # @file 			Makefile
-# @author 			Geoffrey Hunter <gbmhunter@gmail.com> (wwww.cladlab.com)
+# @author 			Geoffrey Hunter <gbmhunter@gmail.com> (wwww.mbedded.ninja)
 # @edited 			n/a
 # @created			2014-09-12
-# @last-modified 	2014-09-12
+# @last-modified 	2014-09-23
 # @brief 			Makefile for Linux-based make, to compile the MOsal library, example code and run unit test code.
 # @details
 #					See README in repo root dir for more info.
