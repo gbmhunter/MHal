@@ -6,10 +6,13 @@ MHal
 A C++ hardware abstraction layer for embedded systems (such as microcontrollers).
 ---------------------------------------------------------------------------------
 
+.. image:: https://api.travis-ci.org/mbedded-ninja/MHal.png?branch=master   
+	:target: https://travis-ci.org/mbedded-ninja/MHal
+
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2014-08-18
 - Last Modified: 2014-09-23
-- Version: v2.1.0.0
+- Version: v2.2.0.0
 - Company: MbeddedNinja
 - Project: The Mbedded toolkit (MToolkit) project.
 - Language: C++
@@ -143,6 +146,7 @@ Changelog
 ========= ========== ===================================================================================================
 Version    Date       Comment
 ========= ========== ===================================================================================================
+v2.2.0.0  2014-09-23 Add .travis.yml file and build image to README, closes #6.
 v2.1.0.0  2014-09-23 Added the 'Gpio::SetDriveMode()' method and implementation for the PSoC platform, closes #5. Updated URL in Makefile.
 v2.0.0.0  2014-09-15 Added hardware abstraction layer for a ADC, closes #2. Wrapped all code in the MbeddedNinja namespace, closes #3. Dropped the Hal prefix on code files and classes, as it is not needed, closes #4.
 v1.0.0.0  2014-09-12 Initial commit, added code, closes #1. GPIO and UART HAL objects added. PSoC-specific child classes for these objects added. Added example to README.
