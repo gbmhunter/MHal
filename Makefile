@@ -4,7 +4,7 @@
 # @edited 			n/a
 # @created			2014-09-12
 # @last-modified 	2014-09-23
-# @brief 			Makefile for Linux-based make, to compile the MOsal library, example code and run unit test code.
+# @brief 			Makefile for Linux-based make, to compile the MOHal library, example code and run unit test code.
 # @details
 #					See README in repo root dir for more info.
 
@@ -36,7 +36,7 @@ all: src test
 
 #======== SRC ==========#
 
-src : $(SRC_OBJ_FILES)
+src : deps $(SRC_OBJ_FILES)
 	# Make library
 	ar r libMOsal.a $(SRC_OBJ_FILES)
 	
@@ -50,12 +50,25 @@ src/%.o: src/%.cpp
 		rm -f $*.d >/dev/null 2>&1
 
 -include $(SRC_OBJ_FILES:.o=.d)
+
+# ======== DEPENDENCIES ========
+
+deps :
+	# Downloading and building dependencies...
+	if [ ! -d ../MUnitTest ]; then \
+	git clone https://github.com/mbedded-ninja/MUnitTest ../MUnitTest; \
+	fi;
+	$(MAKE) -C ../MUnitTest/ all
+	if [ ! -d ../MAssert ]; then \
+	git clone https://github.com/mbedded-ninja/MAssert ../MAssert; \
+	fi;
+	$(MAKE) -C ../MAssert/ all
 	
 	
 # ======== TEST ========
 	
 # Compiles unit test code
-test : $(TEST_OBJ_FILES) | src deps
+test : deps $(TEST_OBJ_FILES) | src
 	# Compiling unit test code
 	g++ $(TEST_LD_FLAGS) -o ./test/Tests.elf $(TEST_OBJ_FILES) -L./ -lMOsal $(DEP_LIB_PATHS) $(DEP_LIBS)
 
@@ -69,20 +82,10 @@ test/%.o: test/%.cpp
 		rm -f $*.d >/dev/null 2>&1
 
 -include $(TEST_OBJ_FILES:.o=.d)
-
-# ======== DEPENDENCIES ========
-
-deps:
-	$(MAKE) -C ../MAssert/ all
-	$(MAKE) -C ../MUnitTest/ all
 	
 # ====== CLEANING ======
 	
-clean: clean-ut clean-src
-	
-clean-ut:
-	@echo " Cleaning test object files..."; $(RM) ./test/*.o
-	@echo " Cleaning test executable..."; $(RM) ./test/*.elf
+clean: clean-src clean-deps clean-ut 
 	
 clean-src:
 	@echo " Cleaning src object files..."; $(RM) ./src/*.o
@@ -93,5 +96,14 @@ clean-src:
 	@echo " Cleaning test executable..."; $(RM) ./test/*.elf
 	@echo " Cleaning example object files..."; $(RM) ./example/*.o
 	@echo " Cleaning example executable..."; $(RM) ./example/*.elf
+	
+clean-deps:
+	@echo " Cleaning deps...";
+	$(MAKE) -C ../MUnitTest/ clean
+	$(MAKE) -C ../MAssert/ clean
+	
+clean-ut:
+	@echo " Cleaning test object files..."; $(RM) ./test/*.o
+	@echo " Cleaning test executable..."; $(RM) ./test/*.elf
 
 	
