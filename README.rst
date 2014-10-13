@@ -11,8 +11,8 @@ A C++ hardware abstraction layer for embedded systems (such as microcontrollers)
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2014-08-18
-- Last Modified: 2014-09-23
-- Version: v2.2.1.0
+- Last Modified: 2014-10-14
+- Version: v2.2.2.0
 - Company: MbeddedNinja
 - Project: The Mbedded toolkit (MToolkit) project.
 - Language: C++
@@ -146,6 +146,7 @@ Changelog
 ========= ========== ===================================================================================================
 Version    Date       Comment
 ========= ========== ===================================================================================================
+v2.2.2.0  2014-10-14 Makefile generates output file libMOsal.a when it really should be libMHal.a, closes #7.
 v2.2.1.0  2014-09-23 Fixed Makefile so that hopefully TravisCI will build properly.
 v2.2.0.0  2014-09-23 Add .travis.yml file and build image to README, closes #6.
 v2.1.0.0  2014-09-23 Added the 'Gpio::SetDriveMode()' method and implementation for the PSoC platform, closes #5. Updated URL in Makefile.

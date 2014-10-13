@@ -3,7 +3,7 @@
 # @author 			Geoffrey Hunter <gbmhunter@gmail.com> (wwww.mbedded.ninja)
 # @edited 			n/a
 # @created			2014-09-12
-# @last-modified 	2014-09-23
+# @last-modified 	2014-10-14
 # @brief 			Makefile for Linux-based make, to compile the MOHal library, example code and run unit test code.
 # @details
 #					See README in repo root dir for more info.
@@ -38,7 +38,7 @@ all: src test
 
 src : deps $(SRC_OBJ_FILES)
 	# Make library
-	ar r libMOsal.a $(SRC_OBJ_FILES)
+	ar r libMHal.a $(SRC_OBJ_FILES)
 	
 # Generic rule for src object files
 src/%.o: src/%.cpp
@@ -70,7 +70,7 @@ deps :
 # Compiles unit test code
 test : deps $(TEST_OBJ_FILES) | src
 	# Compiling unit test code
-	g++ $(TEST_LD_FLAGS) -o ./test/Tests.elf $(TEST_OBJ_FILES) -L./ -lMOsal $(DEP_LIB_PATHS) $(DEP_LIBS)
+	g++ $(TEST_LD_FLAGS) -o ./test/Tests.elf $(TEST_OBJ_FILES) -L./ -lMHal $(DEP_LIB_PATHS) $(DEP_LIBS)
 
 # Generic rule for test object files
 test/%.o: test/%.cpp
