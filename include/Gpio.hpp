@@ -2,7 +2,7 @@
 //! @file				Gpio.h
 //! @author				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created			2014-08-18
-//! @last-modified		2014-09-23
+//! @last-modified		2014-10-14
 //! @brief 				Hardware abstraction layer (HAL) for a GPIO pin.
 //! @details
 //!
@@ -34,13 +34,13 @@ namespace MbeddedNinja
 //========================================== INCLUDES ===========================================//
 //===============================================================================================//
 
-// System headers
+//===== SYSTEM LIBRARIES =====//
 #include <cstdint>		// int8_t, int32_t e.t.c
 
-// User libraries
+//===== USER LIBRARIES =====//
 // none
 
-// User headers
+//===== USER SOURCE =====//
 // none
 
 //===============================================================================================//
