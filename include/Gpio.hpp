@@ -2,7 +2,7 @@
 //! @file				Gpio.h
 //! @author				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created			2014-08-18
-//! @last-modified		2014-10-14
+//! @last-modified		2014-10-24
 //! @brief 				Hardware abstraction layer (HAL) for a GPIO pin.
 //! @details
 //!
@@ -89,7 +89,11 @@ namespace MbeddedNinja
 
 			//! @brief		Sets the GPIO low or high.
 			//! @param[in]	lowHigh		The boolean value you want to set the GPIO pin to.
-			virtual void Write(bool lowHigh) = 0;
+			virtual void Write(bool setHigh) = 0;
+
+			//! @brief		Toggles the GPIO (when set as an output).
+			//! @details	This is useful in times when you want to do things such as flash an LED. Calls the Write() method.
+			void Toggle();
 
 			//! @brief		Reads the value of the pin.
 			virtual bool Read() = 0;
@@ -133,7 +137,8 @@ namespace MbeddedNinja
 			//================================== PROTECTED VARIABLES ===============================//
 			//======================================================================================//
 
-			// none
+			//! @brief		Keeps track of the output state of the GPIO pin.
+			bool isHigh;
 			
 		}; // class Gpio
 

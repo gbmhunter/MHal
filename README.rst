@@ -11,8 +11,8 @@ A C++ hardware abstraction layer for embedded systems (such as microcontrollers)
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - Created: 2014-08-18
-- Last Modified: 2014-10-14
-- Version: v2.2.3.0
+- Last Modified: 2014-10-24
+- Version: v2.3.0.0
 - Company: MbeddedNinja
 - Project: The Mbedded toolkit (MToolkit) project.
 - Language: C++
@@ -146,6 +146,7 @@ Changelog
 ========= ========== ===================================================================================================
 Version    Date       Comment
 ========= ========== ===================================================================================================
+v2.3.0.0  2014-10-24 Add Gpio::Toggle() method add associated unit tests, closes #10.
 v2.2.3.0  2014-10-14 Makefile now compiles with C++11, closes #8. Added Linux GPIO implementation, closes #9.
 v2.2.2.0  2014-10-14 Makefile generates output file libMOsal.a when it really should be libMHal.a, closes #7.
 v2.2.1.0  2014-09-23 Fixed Makefile so that hopefully TravisCI will build properly.

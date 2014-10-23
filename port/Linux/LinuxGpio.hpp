@@ -68,19 +68,34 @@ namespace MbeddedNinja
 			~LinuxGpio(){}
 
 			//! @brief		Sets the GPIO low or high.
-			void Write(bool lowHigh)
+			void Write(bool setHigh)
 			{
-				if(lowHigh)
+				if(setHigh)
+				{
+					this->isHigh = true;
 					std::cout << "GPIO set high." << std::endl;
+				}
 				else
+				{
+					this->isHigh = false;
 					std::cout << "GPIO set low." << std::endl;
+				}
 			}
 
 			//! @brief		Reads the value of the pin.
 			bool Read()
 			{
-				std::cout << "GPIO value read." << std::endl;
-				return true;
+				std::cout << __PRETTY_FUNCTION__ << " called." << std::endl;
+
+				if(this->isHigh)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+
 			}
 
 			void SetDriveMode(DriveMode driveMode)
